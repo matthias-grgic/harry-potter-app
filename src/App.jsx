@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CharacterCard from "./components/CharacterCard";
+import { createGlobalStyle } from "styled-components";
 
 function App() {
   const [students, setStudents] = useState([]);
@@ -24,6 +25,7 @@ function App() {
   return (
     <div className="App">
       <CharacterCard student={students} />
+      
     </div>
   );
 }
