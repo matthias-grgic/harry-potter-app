@@ -3,11 +3,10 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
 
 :root {
-    --first-color: #8ECAE6; // Light Cornflower Blue
-    --second-color: #219EBC; // Blue Green
-    --third-color: #023047; // Dark Blue
-    --fourth-color: #FFB703; // Honey Yellow
-    --fifth-color: #FB8500; // Orange
+    --Gryffindor: #740001;
+    --Slytherin: #1A472A;
+    --Hufflepuff: #FFDB00;
+    --Ravenclaw: #222F5B;
 } 
 
 * {

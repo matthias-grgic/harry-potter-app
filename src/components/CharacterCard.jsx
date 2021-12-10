@@ -8,7 +8,7 @@ function CharacterCard({ student }) {
     <SectionContainer>
       <StyledImage src={student.image} alt="Kein Foto" />
       <StyledArticle>
-        <h2>{student.name}</h2>
+        <StyledHeadline>{student.name}</StyledHeadline>
         <p>{student.house}</p>
         <p>{student.patronus}</p>
         <p>{student.eyeColour}</p>
@@ -22,16 +22,20 @@ function CharacterCard({ student }) {
 export default CharacterCard;
 
 const StyledImage = styled.img`
-  height: 250px;
+  height: 200px;
+  border: ${(props) => (props.student.house.Gryffindor ? "2px solid black" : props.student.house.Slytherin ? "2px solid red" : props.student.house.Hufflepuff ? "2px solid yellow" : null)};
 `;
+
 const SectionContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
   margin: 1rem;
-  background-color: ;
 `;
 
 const StyledArticle = styled.article`
   margin-left: 1rem;
   font-size: 1rem;
+  text-align: left;
 `;
+
+const StyledHeadline = styled.p``;
