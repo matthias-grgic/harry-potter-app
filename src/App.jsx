@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CharacterCard from "./components/CharacterCard";
+import ReactCardFlip from 'react-card-flip';
 
 function App() {
   const [students, setStudents] = useState([]);
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <CharacterCard student={students} />
+      {students.map((student, index) => <CharacterCard key={index} student={student} /> )}  
     </div>
   );
 }

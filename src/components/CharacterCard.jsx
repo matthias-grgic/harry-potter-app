@@ -1,30 +1,48 @@
-import styled from "styled-components";
+import styled from "styled-components"
+import React, { useState } from "react"
+import ReactCardFlip from "react-card-flip"
+import ReactDOM from "react-dom"
 
 function CharacterCard({ student }) {
-  // const [ stateImage, setStateImage ] =useState(false);
-  //   src={stateImage ? 'one image' : 'another image'}
+  const [isFlipped, setIsFlipped] = useState(false)
 
-  const studentProps = student.map((student, index) => (
-    <SectionContainer>
-      <StyledImage src={student.image} alt="Kein Foto" />
-      <StyledArticle>
-        <StyledHeadline>{student.name}</StyledHeadline>
-        <p>{student.house}</p>
-        <p>{student.patronus}</p>
-        <p>{student.eyeColour}</p>
-      </StyledArticle>
-    </SectionContainer>
-  ));
+  const handleClick = () => {
+    setIsFlipped(!isFlipped);
+  };
 
-  return <div>{studentProps}</div>;
+
+  return <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+    <div className="card card__inner is-flipped card__face card__face--front">
+      <SectionContainer>
+        <StyledImage src={student.image} alt="Kein Foto" />
+        <StyledArticle>
+          <p>{student.name}</p>
+        </StyledArticle>
+      </SectionContainer>
+      <button onClick={handleClick}>Click to flip</button>
+    </div>
+
+    <div className="card card__inner is-flipped card__face--back">
+      <SectionContainer>
+        <StyledImage src={student.image} alt="Kein Foto" />
+        <StyledArticle>
+          <p>{student.name}</p>
+          <p>{student.house}</p>
+          <p>{student.patronus}</p>
+          <p>{student.eyeColour}</p>
+        </StyledArticle>
+      </SectionContainer>
+      <button onClick={handleClick}>Click to flip</button>
+    </div>
+  </ReactCardFlip>
 }
 
 export default CharacterCard;
 
 const StyledImage = styled.img`
-  height: 200px;
-  border: ${(props) => (props.student.house.Gryffindor ? "2px solid black" : props.student.house.Slytherin ? "2px solid red" : props.student.house.Hufflepuff ? "2px solid yellow" : null)};
-`;
+  display: flex;
+  max-height: 200px;
+ `;
 
 const SectionContainer = styled.section`
   display: flex;
@@ -38,4 +56,3 @@ const StyledArticle = styled.article`
   text-align: left;
 `;
 
-const StyledHeadline = styled.p``;
