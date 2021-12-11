@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { createGlobalStyle } from "styled-components";
 //import "./CharacterCard.css"
 
-function CharacterCard({ student, index }) {
+function CharacterCard({ name, house, patronus, eyeColour, image }) {
   // const [ stateImage, setStateImage ] =useState(false);
   //   src={stateImage ? 'one image' : 'another image'}
   
 const [cardVisibility, setCardVisibility] = useState(false)
 //const cardClassHidden = cardVisibility ? "":"hidden" 
 //console.log(cardVisibility)
+
 function ToggleCard (props){
 setCardVisibility(!cardVisibility) 
 
@@ -23,32 +24,27 @@ function Button({index}){
 }
 
 
-
-  const studentProps = student.map((student, index) => (
-    
-
-
-    
-    <>
-    <SectionContainer>
-      <StyledImage src={student.image} alt="Kein Foto" />
-      <StyledArticle prop={cardVisibility}>
-        <StyledHeadline>{student.name}</StyledHeadline>
-        <p>{student.house}</p>
-        <p>{student.patronus}</p>
-        <p>{student.eyeColour}</p>
-      </StyledArticle>
-    </SectionContainer>
-    <Button index={index}/>
-   
-    </>
-    
-  ));
+//console.log(augenFarbeBack)
 
   return (
   
-  <div>{studentProps}
-    
+  <div>
+     <>
+    <SectionContainer >
+      <StyledImage src={image} alt="Kein Foto" />
+      <StyledArticle color={eyeColour} cardVisibility={cardVisibility}>
+        <StyledHeadline>{name}</StyledHeadline>
+        <p>{house}</p>
+        <p>{patronus}</p>
+        <p>{eyeColour}</p>
+      </StyledArticle>
+    </SectionContainer>
+    <Button />
+   
+    </>
+
+
+
   </div>
   
   )
@@ -71,7 +67,10 @@ const StyledArticle = styled.article`
   margin-left: 1rem;
   font-size: 1rem;
   text-align: left;
-  display: ${({cardVisibility}) ? 'block':'none'}
-`;
+  display: ${props => props.cardVisibility ? 'block':'none'};
+  background-color: ${props => props.color ? props.color:'red'};
+  
 
+`;
+  // background-color: ${(color) => color.augenFarbeBack};
 const StyledHeadline = styled.p``;
