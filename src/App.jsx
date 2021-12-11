@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CharacterCard from "./components/CharacterCard";
-import ReactCardFlip from 'react-card-flip';
+
 
 function App() {
   const [students, setStudents] = useState([]);

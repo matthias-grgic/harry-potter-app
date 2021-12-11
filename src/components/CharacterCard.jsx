@@ -12,27 +12,24 @@ function CharacterCard({ student }) {
 
 
   return <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-    <div className="card card__inner is-flipped card__face card__face--front">
+    <div onClick={handleClick} className="card card__inner is-flipped card__face card__face--front">
       <SectionContainer>
-        <StyledImage src={student.image} alt="Kein Foto" />
         <StyledArticle>
-          <p>{student.name}</p>
+          <h2 className="card__header">{student.name}</h2>
         </StyledArticle>
       </SectionContainer>
-      <button onClick={handleClick}>Click to flip</button>
     </div>
 
-    <div className="card card__inner is-flipped card__face--back">
+    <div onClick={handleClick} className="card card__inner is-flipped card__face card__face--back">
       <SectionContainer>
-        <StyledImage src={student.image} alt="Kein Foto" />
-        <StyledArticle>
-          <p>{student.name}</p>
+        <StyledImage className="pp" src={student.image} />
+        <StyledArticle className="card__content">
+          <h2>{student.name}</h2>
           <p>{student.house}</p>
           <p>{student.patronus}</p>
           <p>{student.eyeColour}</p>
         </StyledArticle>
       </SectionContainer>
-      <button onClick={handleClick}>Click to flip</button>
     </div>
   </ReactCardFlip>
 }
@@ -53,6 +50,5 @@ const SectionContainer = styled.section`
 const StyledArticle = styled.article`
   margin-left: 1rem;
   font-size: 1rem;
-  text-align: left;
 `;
 
