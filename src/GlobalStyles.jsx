@@ -3,10 +3,10 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
 
 :root {
-    --Gryffindor: #740001;
-    --Slytherin: #1A472A;
-    --Hufflepuff: #FFDB00;
-    --Ravenclaw: #222F5B;
+    --Gryffindor: #6d0000;
+    --Slytherin: #0b3a07;
+    --Hufflepuff: #c6a513;
+    --Ravenclaw: #191c68;
 } 
 
 * {
