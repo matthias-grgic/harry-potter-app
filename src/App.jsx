@@ -9,6 +9,7 @@ function App() {
     fetch("http://hp-api.herokuapp.com/api/characters/students")
       .then((response) => response.json())
       .then((studentsFromApi) => {
+        console.log(studentsFromApi)
         const allStudents = studentsFromApi.map((student) => {
           return {
             name: student.name,
@@ -16,6 +17,7 @@ function App() {
             patronus: student.patronus,
             eyeColour: student.eyeColour,
             image: student.image,
+            actor: student.actor,
           };
         });
         setStudents(allStudents);
