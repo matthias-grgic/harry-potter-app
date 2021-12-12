@@ -34,12 +34,20 @@ export default ToggleButton;
 const StyledList = styled.li`
 list-style: none;
 font-size: 1rem;
-margin-top: 0px;
-line-height: 1px;
+line-height: 5px;
 `;
 
 const StyledButton = styled.button`
-margin-bottom: 20px;
-padding: 5px;  
+background-color: lightgray;
+border-radius: 5px;
+border: 2px solid black;
+padding: 3px;
+margin-bottom: 15px;
+&:hover {
+  background-color: #6d0000;
+  color: white;}
 `;
+
+
+
   
