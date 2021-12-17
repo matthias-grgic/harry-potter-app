@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useState } from "react";
-import './ToggleButton.css';
 
 function ToggleButton ({house, patronus, eyeColour }) {
   const [cardVisibility, setCardVisibility] = useState(false);
@@ -9,13 +8,12 @@ function ToggleButton ({house, patronus, eyeColour }) {
   }
 
   function Card({ cardVisibility }) {
-    const cardClass = cardVisibility ? "" : "hidden";
     return (
-    <article className={cardClass}>
+    <StyledArticle cardVisibility={cardVisibility}>
       <StyledList>House: {house}</StyledList> <br/>
       <StyledList>Patronus: {patronus}</StyledList> <br/> 
       <StyledList>Eyecolour: {eyeColour}</StyledList>
-    </article>
+    </StyledArticle>
     );
   }
 
@@ -48,6 +46,9 @@ margin-bottom: 15px;
   color: white;}
 `;
 
+const StyledArticle = styled.article`
+  visibility: ${props => props.cardVisibility ? 'visible' : 'hidden' }
+`;
 
 
   
