@@ -1,19 +1,21 @@
 import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
 import { useEffect, useState } from "react";
+import {saveToLocal, loadFromLocal} from './Library/localStorage';
 import CharacterCard from "./components/CharacterCard";
 import { Routes, Route, NavLink, Link} from 'react-router-dom';
 import Logo from "./components/Logo";
 
 function App() {
   const [students, setStudents] = useState([]);
-  console.log(students);
+  /* console.log(students); */
   useEffect(() => {
     fetch("http://hp-api.herokuapp.com/api/characters/students")
       .then((response) => response.json())
       .then((studentsFromApi) => {
-        const allStudents = studentsFromApi.map((student) => {
+        const allStudents = studentsFromApi.map((student, index) => {
           return {
+            id: index+1,
             name: student.name,
             house: student.house,
             patronus: student.patronus,
@@ -25,6 +27,31 @@ function App() {
       });
   }, []);
 
+  console.log(students);
+  
+  const localStorageFavouriteCharacters = loadFromLocal('_favouriteCharacters');
+  const [favouriteCharacters, setFavouriteCharacters] = useState (localStorageFavouriteCharacters ?? []);
+
+    useEffect(() => {
+        saveToLocal('_favouriteCharacters', favouriteCharacters);
+      }, [favouriteCharacters]);
+
+      function addToFavourites (favouriteCharacterToAdd) {
+        if (favouriteCharacters.some(
+            (everyFavouriteCharacter) =>
+            everyFavouriteCharacter.id === favouriteCharacterToAdd.id
+        )
+          ) {
+          const updatedFavouriteCharacters = favouriteCharacters.filter(
+            (everyFavouriteCharacter) =>
+            everyFavouriteCharacter.id !== favouriteCharacterToAdd.id
+          );
+          setFavouriteCharacters(updatedFavouriteCharacters);
+        } else {
+        setFavouriteCharacters([...favouriteCharacters, favouriteCharacterToAdd]);
+        } 
+      }
+
   return (
     <div>
       <header>
@@ -33,8 +60,8 @@ function App() {
       </Headline>
 
       <NavLinkStyle>
-        <NavLink to="CharacterCard">Charactercards</NavLink>
-        <NavLink to="FavouriteCharacter">Favourite Characters</NavLink>
+        <NavLink to="character-card">Charactercards</NavLink>
+        <NavLink to="favourite-characters">Favourite Characters</NavLink>
       </NavLinkStyle>
       </header>
 
@@ -49,8 +76,13 @@ function App() {
         />{" "}
         
         <Route
-          path="CharacterCard"
-          element={<CharacterCard student={students} />}
+          path="character-card"
+          element={<CharacterCard student={students} onAddToFavourites={addToFavourites} favouriteCharacters={favouriteCharacters} />}
+        />
+
+        <Route
+          path="favourite-characters"
+          element={<CharacterCard student={favouriteCharacters} onAddToFavourites={addToFavourites} favouriteCharacters={favouriteCharacters}/>}
         />
       </Routes>
 
