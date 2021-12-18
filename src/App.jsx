@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CharacterCard from "./components/CharacterCard";
+import ReactDOM from 'react-dom'
 
 
 function App() {
