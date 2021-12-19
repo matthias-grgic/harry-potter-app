@@ -40,23 +40,45 @@ setFavouriteStudents([...favouriteStudents, student])
 }
 //console.log(favouriteStudents)
 const [studentsFilteredByHouse, setStudentsFilteredByHouse] = useState([])
+const [favStudentsFilteredByHouse, setFavStudentsFilteredByHouse]= useState([])
+const [selected, setSelcted]= useState('all')
+
 function filterCharArray (house){
-const newSortedArray = students.filter((everyStudnet)=> everyStudnet.house === house)
+if (house === 'all'){
+setStudentsFilteredByHouse([])
+setFavStudentsFilteredByHouse([])
+setSelcted(house)
+}else {
+const newSortedArray = students.filter((everyStudent)=> everyStudent.house === house)
 setStudentsFilteredByHouse (newSortedArray)
-}
+const newFavSortedArray = favouriteStudents.filter((everyFavStudent)=>everyFavStudent.house === house)
+setFavStudentsFilteredByHouse(newFavSortedArray)
+setSelcted(house)
+}}
+
+
+//console.log(studentsFilteredByHouse)
 
 
 
-const studentsToRender = studentsFilteredByHouse.length >1 ? studentsFilteredByHouse : students
-//const favStudentsToRender = studentsToRender.filter((everyStudnet)=> everyStudnet === favouriteStudents) 
 
+// const [searchedStudent, setSearchedStudent] = useState()
+// const [inputValue, setInputValue] = useState()
+// function searchStudent(event){
+// const searchString = event.target.value
+// setInputValue (searchString)
+// const namedStudent = students.filter((oneStudent)=> oneStudent.name.includes(searchString))
+// setSearchedStudent(namedStudent)
+// }
 
+const studentsToRender =  studentsFilteredByHouse.length>0 ? studentsFilteredByHouse:students
+const favStudentsToRender = favStudentsFilteredByHouse.length>0 ? favStudentsFilteredByHouse : favouriteStudents 
 
-//studentsFilteredByHouse.map ((everyFavStudent)=> everyFavStudent===favouriteStudents)
-
+// const studentsToRender2 = searchedStudent?searchedStudent:students
 
 // console.log(studentsToRender)
 // console.log(favStudentsToRender)
+
   return (
     <div>
       <header>
@@ -69,7 +91,7 @@ const studentsToRender = studentsFilteredByHouse.length >1 ? studentsFilteredByH
         <NavLink to="favouriteCharacter">Favourite Characters</NavLink>
       </NavLinkStyle>
       <label htmlFor="sort"> Show by House:
-      <select name='sort' id='sort' onChange ={()=>filterCharArray(sort.value)} >
+      <select name='sort' id='sort' value={selected} onChange ={()=> filterCharArray(sort.value)} >
       <option value="all">All</option>
         <option value="Gryffindor">Gryffindor</option>
         <option value="Slytherin">Slytherin</option>
@@ -78,7 +100,13 @@ const studentsToRender = studentsFilteredByHouse.length >1 ? studentsFilteredByH
 
       </select>
       </label>
-      </header>
+      {/* <label htmlFor="input"> Namensuche
+      <input type='text' name='input' onInput={searchStudent} value={inputValue}/> */}
+
+
+
+      {/* </label> */}
+      </header> 
 
       <Routes>
         <Route
@@ -96,7 +124,7 @@ const studentsToRender = studentsFilteredByHouse.length >1 ? studentsFilteredByH
         />
         <Route
           path="favouriteCharacter"
-          element={<CharacterCard student={favouriteStudents} onAddToFavourites={ addToFavourites } favouriteStudents={ favouriteStudents }/>}
+          element={<CharacterCard student={favStudentsToRender} onAddToFavourites={ addToFavourites } favouriteStudents={ favouriteStudents }/>}
         />
       </Routes>
 

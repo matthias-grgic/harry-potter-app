@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import ToggleButton from "./ToggleButton";
 
-function CharacterCard({student}) {
+function CharacterCard({student, onAddToFavourites, favouriteStudents}) {
 
   const studentProps = student.map((student, index) => (
     <SectionContainer key={index}>
-      <StyledImage src={student.image} alt="Kein Foto" style={{border: student.house === "Gryffindor" ? "4px solid var(--Gryffindor)" : student.house === "Slytherin" ? "4px solid var(--Slytherin)" : student.house === "Hufflepuff" ? "4px solid var(--Hufflepuff)" : student.house === "Ravenclaw" ? "4px solid var(--Ravenclaw)" : "4px solid black"}}/>
+      <StyledImage src={student.image} alt="Kein Foto" 
+      style={{border: student.house === "Gryffindor" ? "4px solid var(--Gryffindor)" : student.house === "Slytherin" ? "4px solid var(--Slytherin)" : student.house === "Hufflepuff" ? "4px solid var(--Hufflepuff)" : student.house === "Ravenclaw" ? "4px solid var(--Ravenclaw)" : "4px solid black"}}/>
       <StyledArticle>
-        <StyledHeadline>{student.name}</StyledHeadline>
+        <StyledHeadline>{student.name} <FavoriteIcon onClick={() => onAddToFavourites(student) }> {favouriteStudents.some((favStudent)=> favStudent.id===student.id)
+        ?'😻':'💩'}</FavoriteIcon> </StyledHeadline>
         <ToggleButton house={student.house} patronus={student.patronus} eyeColour={student.eyeColour}/>
       </StyledArticle>
     </SectionContainer>
@@ -44,3 +46,6 @@ const StyledHeadline = styled.h2`
   text-decoration: underline;
   margin-bottom: 8px;
 `;
+const FavoriteIcon = styled.span`
+cursor:pointer;
+`
