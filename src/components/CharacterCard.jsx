@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import ToggleButton from "./ToggleButton";
 
-
 function CharacterCard({student, onAddToFavourites, favouriteCharacters}) {
 
   const studentProps = student.map((student, index) => (
@@ -9,9 +8,13 @@ function CharacterCard({student, onAddToFavourites, favouriteCharacters}) {
       <StyledImage src={student.image} alt="Kein Foto" style={{border: student.house === "Gryffindor" ? "4px solid var(--Gryffindor)" : student.house === "Slytherin" ? "4px solid var(--Slytherin)" : student.house === "Hufflepuff" ? "4px solid var(--Hufflepuff)" : student.house === "Ravenclaw" ? "4px solid var(--Ravenclaw)" : "4px solid black"}}/>
       <StyledArticle>
         <StyledHeadline>{student.name}<FavouritesIcon 
-        onClick={() => onAddToFavourites(student)}>{favouriteCharacters.some((favourite) => favourite.id === student.id)
+        onClick={() => onAddToFavourites(student)}> {/* z.B. KLICK AUF HARRY-POTTER */}
+          {favouriteCharacters.some((favourite) => favourite.id === student.id)
         ? '⭐️'
         : '🪄' }
+          {/* // Prüfung ob im favouriteCharacters-Array eine ID der geklickten Student-ID entspricht
+          // wenn TRUE, mache STERN, wenn FALSE, mache Zauberstab
+          // HIER WIRD NUR DAS ICON GEÄNDERT!!! */}
         </FavouritesIcon>
         </StyledHeadline>
         <ToggleButton house={student.house} patronus={student.patronus} eyeColour={student.eyeColour}/>
@@ -20,7 +23,8 @@ function CharacterCard({student, onAddToFavourites, favouriteCharacters}) {
   ));
 
   return (
-  <div>{studentProps} 
+  <div>
+    {studentProps} 
   </div>
   );
 }

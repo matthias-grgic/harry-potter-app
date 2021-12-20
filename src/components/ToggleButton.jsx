@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 function ToggleButton ({house, patronus, eyeColour }) {
+  
   const [cardVisibility, setCardVisibility] = useState(false);
   function toggleCard() {
     setCardVisibility(!cardVisibility);
