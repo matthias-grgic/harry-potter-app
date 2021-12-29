@@ -11,14 +11,24 @@ function App() {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([])
 
-  const handleFilterCards = (house) => {
+  const handleFilterStudents = (house) => {
+    // event.target.value kommt hier rein mithilfe von onFilterStudents
+    // d.h. house = event.target.value
+    // wenn Gryffindor geklickt, ist house = Gryffindor
     if (house === '') {
-      setFilteredStudents(students)  
+      setFilteredStudents(students)
+      // wenn Filter ausgewählt, zeige mir alle  
     } else {
       const updatedFilteredStudents = students.filter(student => student.house === house)
       setFilteredStudents(updatedFilteredStudents)
+      // wenn ein house ausgewählt, filtere ursprüngliche students
+      // Bsp. Auswahl Gryffindor
+      // students.filter(Objekt Harry steht hier für student => Gryffindor(student.house === Gryffindor))
+      // will wissen, ob ausgewähltes Haus mit dem Haus des jew. Studenten übereinstimmt
+      // Harry kommt in updatedFilteredStudents, weil die Funktion checkt, dass Harrys house = ausgewähltes house ist
+      // Check Draco Malfoy -> kommt nicht in updatedFilteredStudents, weil student.house (Slytherin) !=== Gryffindor, ergibt FALSE
+      // setFilteredStudents auf die updatedFilteredStudents!!! 
     }
-    
   }
 
   useEffect(() => {
@@ -85,7 +95,7 @@ console.log(filteredStudents, filteredStudents.length)
 
       <NavLinkStyle>
         <NavLink to="character-card">Charactercards</NavLink>
-        <FilterButton onFilterStudents={handleFilterCards} />
+        <FilterButton onFilterStudents={handleFilterStudents} />
         <NavLink to="favourite-characters">Favourite Characters</NavLink>
       </NavLinkStyle>
       </header>
